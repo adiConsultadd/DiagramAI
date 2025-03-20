@@ -1,0 +1,28 @@
+create_pdf_extraction_task:
+  description: >
+    Extract the complete text content from the PDF file. {pdf_url}
+    Make sure to preserve the document structure as much as possible, including paragraphs, lists, and section headings. Pay special attention to maintaining the hierarchical organization of the content.
+  expected_output:
+    The complete text content of the PDF document with preserved structure.
+    The output should contain all text from the document, organized in a way that maintains the original document flow and organization.
+  agent: create_pdf_agent
+
+create_section_extraction_task:
+  description: >
+    Using the extracted text from the previous task, identify and extract the 
+    following specific sections: {sections_to_extract}.
+    For each section:
+    1. Identify the section boundaries accurately
+    2. Extract the complete content of each section
+    3. Maintain the original formatting within each section
+    4. Ensure no content from other sections is included
+    The sections may be indicated by headings like "2. Problem" or simply "Problem".
+  expected_output:
+    '''A structured object containing the extracted sections with the following format:
+    {{
+        "{sections_to_extract[0]}": "[complete content of section]",
+        "{sections_to_extract[1]}": "[complete content of section]",
+        "{sections_to_extract[2]}": "[complete content of section]"
+    }}
+    Each section should contain its complete content with proper formatting preserved'''
+  agent: create_section_extraction_agent
