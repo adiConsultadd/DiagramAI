@@ -33,7 +33,7 @@ generate_json:
     Convert the solution description into a structured JSON for diagram generation.
     The JSON should follow this structure:
     {jsonOutput}
-          
+    And make sure all the fields are filled in the given json
     Identify all components, their relationships, external systems, and workflow steps from the solution text.
     Use knowledge to give icon names to components and categorize them appropriately.
     Each component should have a unique ID and appropriate categorization.
@@ -45,3 +45,16 @@ generate_json:
     A well-structured JSON object representing the architectural solution.
     The JSON should contain all necessary information to generate a diagram that accurately reflects the solution architecture.
   agent: section_json_to_steps_agent
+
+rule_validation_task:
+  description: >
+    Perform a rule-based validation check on the given system architecture to ensure that:
+    Reference for the incompatible teck can be found in this json. {json_url}
+    No incompatible technologies are used together.
+    The solution adheres to regulatory and security standards.
+    The architecture follows basic compatibility guidelines.
+  expected_output: >
+    A list of detected violations (if any).
+    A confirmation message if no violations are found.
+  agent: rule_validation_agent
+
