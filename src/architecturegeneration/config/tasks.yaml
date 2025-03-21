@@ -57,18 +57,3 @@ rule_validation_task:
     A confirmation message if no violations are found.
   agent: rule_validation_agent
 
-validation_task:
-  description: >
-    Conduct a final feasibility analysis using LLM-based reasoning.
-    The initial proposed solution is the output of create_section_extraction_task task.
-    And the generate workflow json is the output of the generate_json task.
-    So, use these two files for the reference and generate me the final answer.
-    Assess:
-      Logical inconsistencies in the proposed architecture.
-      Feasibility score (0-100) based on risk assessment.
-      Optimization suggestions for better performance, security, and maintainability.
-  expected_output: >
-    A detailed feasibility report.
-    A final risk assessment.
-    Suggested improvements for the proposed solution.
-  agent: validation_agent

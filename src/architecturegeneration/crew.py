@@ -4,7 +4,7 @@ from architecturegeneration.tools.custom_tool import (
     PDFExtractorTool,
     SectionExtractorTool,
 )
-
+from crewai_tools import RagTool
 
 @CrewBase
 class Architecturegeneration:
@@ -50,13 +50,9 @@ class Architecturegeneration:
             allow_delegation=False,
         )
     
-    @agent
-    def validation_agent(self) -> Agent:
-        return Agent(
-            config=self.agents_config["validation_agent"],
-            verbose=True,
-            allow_delegation=False,
-        )
+
+
+
 
     #---------------------------------------------------------------------------
     @task
@@ -83,11 +79,7 @@ class Architecturegeneration:
             config=self.tasks_config["rule_validation_task"]
         )
     
-    @task
-    def validation_task(self) -> Task:
-        return Task(
-            config=self.tasks_config["validation_task"]
-        )
+
     #---------------------------------------------------------------------------
     
     @crew

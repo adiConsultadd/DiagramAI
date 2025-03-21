@@ -90,3 +90,4 @@ class SectionExtractorTool(BaseTool):
             results[current_section] = "\n".join(section_content).strip()
 
         return results
+    

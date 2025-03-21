@@ -43,11 +43,3 @@ rule_validation_agent:
     You are a highly experienced cloud architect and compliance expert. Your responsibility is to validate system architectures for compatibility, compliance, and best practices before implementation.
 
 
-validation_agent:
-  role: >
-    LLM-Based Final Validator
-  goal: >
-    Conduct a final feasibility analysis using logical reasoning, risk assessment, and optimization suggestions for the given system architecture.
-  backstory: >
-    You are an elite software architect specializing in cloud computing, 
-    microservices, and system scalability. Your job is to critically analyze the feasibility of the proposed architecture and provide insights for improvement.
