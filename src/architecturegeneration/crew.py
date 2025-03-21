@@ -20,7 +20,7 @@ class Architecturegeneration:
         pdf_tool = PDFExtractorTool()
 
         return Agent(
-            config=self.agents_config["pdf_extracter"],
+            config=self.agents_config["create_pdf_agent"],
             verbose=True,
             allow_delegation=False,
             tools=[pdf_tool],
@@ -31,7 +31,7 @@ class Architecturegeneration:
         section_tool = SectionExtractorTool()
 
         return Agent(
-            config=self.agents_config["certain_section_extracter"],
+            config=self.agents_config["create_section_extraction_agent"],
             verbose=True,
             allow_delegation=False,
             tools=[section_tool],
@@ -40,7 +40,7 @@ class Architecturegeneration:
     @agent
     def section_json_to_steps_agent(self) -> Agent:
         return Agent(
-            config=self.agents_config["section_json_to_steps"],
+            config=self.agents_config["section_json_to_steps_agent"],
             verbose=True,
             allow_delegation=False,
             knowledge_sources=[self.csv_source],
@@ -74,7 +74,7 @@ class Architecturegeneration:
     @task
     def create_section_json_to_steps_task(self) -> Task:
         return Task(
-            config=self.tasks_config["generate_json"],
+            config=self.tasks_config["create_section_json_to_steps_task"],
         )
     
     @task
