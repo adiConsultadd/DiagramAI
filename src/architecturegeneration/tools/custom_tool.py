@@ -1,7 +1,5 @@
-from typing import Optional
 from crewai.tools import BaseTool
 from langchain_community.document_loaders import PyPDFLoader
-from proto import Field
 
 
 class PDFExtractorTool(BaseTool):
@@ -90,4 +88,4 @@ class SectionExtractorTool(BaseTool):
             results[current_section] = "\n".join(section_content).strip()
 
         return results
-    
+

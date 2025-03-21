@@ -35,6 +35,7 @@ generate_json:
     {jsonOutput}
     And make sure all the fields are filled in the given json
     Identify all components, their relationships, external systems, and workflow steps from the solution text.
+    Use knowledge to give icon names to components and categorize them appropriately.
     Each component should have a unique ID and appropriate categorization.
     Map the relationships between components accurately.
     Define workflow steps based on the implementation process described.

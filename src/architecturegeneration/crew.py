@@ -4,6 +4,8 @@ from architecturegeneration.tools.custom_tool import (
     PDFExtractorTool,
     SectionExtractorTool,
 )
+from crewai.knowledge.source.csv_knowledge_source import CSVKnowledgeSource
+
 from crewai_tools import RagTool
 
 @CrewBase
@@ -11,7 +13,8 @@ class Architecturegeneration:
     agents_config = "config/agents.yaml"
     tasks_config = "config/tasks.yaml"
 
-    #---------------------------------------------------------------------------
+    csv_source = CSVKnowledgeSource(file_paths=["eraser_icons.csv"])
+
     @agent
     def create_pdf_agent(self) -> Agent:
         pdf_tool = PDFExtractorTool()
@@ -40,6 +43,7 @@ class Architecturegeneration:
             config=self.agents_config["section_json_to_steps"],
             verbose=True,
             allow_delegation=False,
+            knowledge_sources=[self.csv_source],
         )
 
     @agent
@@ -84,6 +88,8 @@ class Architecturegeneration:
     
     @crew
     def crew(self) -> Crew:
+        """Creates the Architecturegeneration crew"""
+
         return Crew(
             agents=self.agents,
             tasks=self.tasks,
