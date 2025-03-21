@@ -20,9 +20,27 @@ create_section_extraction_task:
   expected_output:
     '''A structured object containing the extracted sections with the following format:
     {{
-        "{sections_to_extract[0]}": "[complete content of section]",
-        "{sections_to_extract[1]}": "[complete content of section]",
-        "{sections_to_extract[2]}": "[complete content of section]"
+    "{sections_to_extract[0]}": "[complete content of section]",
+    "{sections_to_extract[1]}": "[complete content of section]",
+    "{sections_to_extract[2]}": "[complete content of section]"
     }}
     Each section should contain its complete content with proper formatting preserved'''
   agent: create_section_extraction_agent
+
+generate_json:
+  description: >
+    Use the extracted output from the previous task to convert the solution description into a structured JSON for diagram generation.
+    Convert the solution description into a structured JSON for diagram generation.
+    The JSON should follow this structure:
+    {jsonOutput}
+          
+    Identify all components, their relationships, external systems, and workflow steps from the solution text.
+    Each component should have a unique ID and appropriate categorization.
+    Map the relationships between components accurately.
+    Define workflow steps based on the implementation process described.
+    Set appropriate metadata for the diagram.
+
+  expected_output:
+    A well-structured JSON object representing the architectural solution.
+    The JSON should contain all necessary information to generate a diagram that accurately reflects the solution architecture.
+  agent: section_json_to_steps_agent

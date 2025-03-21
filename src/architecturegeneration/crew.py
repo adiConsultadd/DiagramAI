@@ -1,49 +1,70 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
-from architecturegeneration.tools.custom_tool import PDFExtractorTool, SectionExtractorTool
+from architecturegeneration.tools.custom_tool import (
+    PDFExtractorTool,
+    SectionExtractorTool,
+)
+
 
 @CrewBase
-class Architecturegeneration():
-    agents_config = 'config/agents.yaml'
-    tasks_config = 'config/tasks.yaml'
+class Architecturegeneration:
+    agents_config = "config/agents.yaml"
+    tasks_config = "config/tasks.yaml"
 
     @agent
     def create_pdf_agent(self) -> Agent:
         pdf_tool = PDFExtractorTool()
-        
+
         return Agent(
-            config=self.agents_config['pdf_extracter'],
+            config=self.agents_config["pdf_extracter"],
             verbose=True,
             allow_delegation=False,
             tools=[pdf_tool],
         )
 
     @agent
-    def create_section_extraction_agent(self) -> Agent :
+    def create_section_extraction_agent(self) -> Agent:
         section_tool = SectionExtractorTool()
-        
+
         return Agent(
-            config=self.agents_config['certain_section_extracter'],
+            config=self.agents_config["certain_section_extracter"],
             verbose=True,
             allow_delegation=False,
             tools=[section_tool],
         )
 
+    @agent
+    def section_json_to_steps_agent(self) -> Agent:
+        # section_tool = SolutionToJSONTool()
+
+        return Agent(
+            config=self.agents_config["section_json_to_steps"],
+            verbose=True,
+            allow_delegation=False,
+            # tools=[section_tool],
+        )
+
     @task
     def create_pdf_extraction_task(self) -> Task:
         return Task(
-            config=self.tasks_config['create_pdf_extraction_task'],
+            config=self.tasks_config["create_pdf_extraction_task"],
             # inputs={"pdf_url": pdf_url},
         )
 
     @task
     def create_section_extraction_task(self) -> Task:
         return Task(
-           config=self.tasks_config['create_section_extraction_task'],
-        #    inputs={
-        #         "extracted_text": extracted_text,
-        #         "sections_to_extract": sections_to_extract
-        #     },
+            config=self.tasks_config["create_section_extraction_task"],
+            #    inputs={
+            #         "extracted_text": extracted_text,
+            #         "sections_to_extract": sections_to_extract
+            #     },
+        )
+
+    @task
+    def create_section_json_to_steps_task(self) -> Task:
+        return Task(
+            config=self.tasks_config["generate_json"],
         )
 
     @crew
