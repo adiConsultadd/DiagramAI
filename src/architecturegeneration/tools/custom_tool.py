@@ -90,25 +90,3 @@ class SectionExtractorTool(BaseTool):
             results[current_section] = "\n".join(section_content).strip()
 
         return results
-
-
-# class SolutionToJSONTool(BaseTool):
-#     """Tool for converting solution text to structured JSON architecture"""
-
-#     name: str = "Solution to JSON Converter"
-#     description: str = (
-#         "Converts solution text to a structured JSON format for architecture diagrams"
-#     )
-
-#     solution_text: str = Field(..., description="Solution text to convert to JSON")
-
-#     def _run(self, solution_text: Optional[str] = None) -> str:
-#         """Convert solution text to structured JSON for architecture diagram"""
-#         text = solution_text or self.solution_text
-
-#         try:
-#             # The LLM should handle this transformation in the agent's execution
-#             # This tool primarily serves as a capability marker for the agent
-#             return text
-#         except Exception as e:
-#             return f"Error converting solution to JSON: {str(e)}"
