@@ -4,13 +4,14 @@ from architecturegeneration.tools.custom_tool import (
     PDFExtractorTool,
     SectionExtractorTool,
 )
-
+from crewai_tools import RagTool
 
 @CrewBase
 class Architecturegeneration:
     agents_config = "config/agents.yaml"
     tasks_config = "config/tasks.yaml"
 
+    #---------------------------------------------------------------------------
     @agent
     def create_pdf_agent(self) -> Agent:
         pdf_tool = PDFExtractorTool()
@@ -41,6 +42,19 @@ class Architecturegeneration:
             allow_delegation=False,
         )
 
+    @agent
+    def rule_validation_agent(self) -> Agent:
+        return Agent(
+            config=self.agents_config["rule_validation_agent"],
+            verbose=True,
+            allow_delegation=False,
+        )
+    
+
+
+
+
+    #---------------------------------------------------------------------------
     @task
     def create_pdf_extraction_task(self) -> Task:
         return Task(
@@ -58,7 +72,16 @@ class Architecturegeneration:
         return Task(
             config=self.tasks_config["generate_json"],
         )
+    
+    @task
+    def rule_validation_task(self) -> Task:
+        return Task(
+            config=self.tasks_config["rule_validation_task"]
+        )
+    
 
+    #---------------------------------------------------------------------------
+    
     @crew
     def crew(self) -> Crew:
         return Crew(
