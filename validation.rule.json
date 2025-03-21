@@ -1,0 +1,12 @@
+{
+    "invalid_combinations": [
+      ["AWS Lambda", "EFS"],
+      ["GCP BigQuery", "AWS S3"],
+      ["Firebase", "PostgreSQL"]
+    ],
+    "compliance_requirements": {
+      "GDPR": ["Data encryption", "EU storage"],
+      "HIPAA": ["PHI protection", "Access logging"]
+    }
+  }
+  

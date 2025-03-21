@@ -7,6 +7,7 @@ warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
 def run():
     pdf_url = "after-final_case_studies_20250319_190719.pdf"
+    json_url = "validation.rule.json"
 
     # sections_to_extract = input("Enter sections to extract (comma-separated): ").split(',')
     sections_to_extract = (
@@ -84,12 +85,11 @@ def run():
         ],
     }
 
-    print(sections_to_extract)
-
     inputs = {
         "pdf_url": pdf_url,
         "sections_to_extract": sections_to_extract,
         "jsonOutput": jsonOutput,
+        "json_url": json_url
     }
 
     try:
