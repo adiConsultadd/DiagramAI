@@ -38,7 +38,6 @@ class Architecturegeneration:
 
     @agent
     def section_json_to_steps_agent(self) -> Agent:
-
         return Agent(
             config=self.agents_config["section_json_to_steps"],
             verbose=True,
@@ -67,6 +66,7 @@ class Architecturegeneration:
     @crew
     def crew(self) -> Crew:
         """Creates the Architecturegeneration crew"""
+
         return Crew(
             agents=self.agents,
             tasks=self.tasks,
