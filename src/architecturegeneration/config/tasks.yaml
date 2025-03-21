@@ -27,7 +27,7 @@ create_section_extraction_task:
     Each section should contain its complete content with proper formatting preserved'''
   agent: create_section_extraction_agent
 
-generate_json:
+create_section_json_to_steps_task:
   description: >
     Use the extracted output from the previous task to convert the solution description into a structured JSON for diagram generation.
     Convert the solution description into a structured JSON for diagram generation.

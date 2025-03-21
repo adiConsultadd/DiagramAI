@@ -1,4 +1,4 @@
-pdf_extracter:
+create_pdf_agent:
   role: >
     PDF Extraction Specialist
   goal: >
@@ -10,7 +10,7 @@ pdf_extracter:
     You pride yourself on maintaining the original formatting and ensuring no content
     is lost during the extraction process.
 
-certain_section_extracter:
+create_section_extraction_agent:
   role: >
     Content Section Analyst
   goal: >
@@ -22,7 +22,7 @@ certain_section_extracter:
     is inconsistent. You've worked with thousands of business documents and have 
     developed an intuition for identifying section boundaries accurately.
 
-section_json_to_steps:
+section_json_to_steps_agent:
   role: >
     Architecture JSON Creator
   goal: >
