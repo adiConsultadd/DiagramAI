@@ -4,12 +4,15 @@ from architecturegeneration.tools.custom_tool import (
     PDFExtractorTool,
     SectionExtractorTool,
 )
+from crewai.knowledge.source.csv_knowledge_source import CSVKnowledgeSource
 
 
 @CrewBase
 class Architecturegeneration:
     agents_config = "config/agents.yaml"
     tasks_config = "config/tasks.yaml"
+
+    csv_source = CSVKnowledgeSource(file_paths=["eraser_icons.csv"])
 
     @agent
     def create_pdf_agent(self) -> Agent:
@@ -35,30 +38,24 @@ class Architecturegeneration:
 
     @agent
     def section_json_to_steps_agent(self) -> Agent:
-        # section_tool = SolutionToJSONTool()
 
         return Agent(
             config=self.agents_config["section_json_to_steps"],
             verbose=True,
             allow_delegation=False,
-            # tools=[section_tool],
+            knowledge_sources=[self.csv_source],
         )
 
     @task
     def create_pdf_extraction_task(self) -> Task:
         return Task(
             config=self.tasks_config["create_pdf_extraction_task"],
-            # inputs={"pdf_url": pdf_url},
         )
 
     @task
     def create_section_extraction_task(self) -> Task:
         return Task(
             config=self.tasks_config["create_section_extraction_task"],
-            #    inputs={
-            #         "extracted_text": extracted_text,
-            #         "sections_to_extract": sections_to_extract
-            #     },
         )
 
     @task
@@ -70,9 +67,6 @@ class Architecturegeneration:
     @crew
     def crew(self) -> Crew:
         """Creates the Architecturegeneration crew"""
-        # print(pdf_url)
-        # pdf_task = self.create_pdf_extraction_task(pdf_url=pdf_url)
-        # section_task = self.create_section_extraction_task(extracted_text=pdf_task.output, sections_to_extract=sections_to_extract)
         return Crew(
             agents=self.agents,
             tasks=self.tasks,
