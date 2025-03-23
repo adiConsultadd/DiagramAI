@@ -5,6 +5,7 @@ from architecturegeneration.tools.custom_tool import (
     SectionExtractorTool,
 )
 from crewai.knowledge.source.csv_knowledge_source import CSVKnowledgeSource
+from crewai.knowledge.source.text_file_knowledge_source import TextFileKnowledgeSource
 
 from crewai_tools import RagTool
 
@@ -15,6 +16,7 @@ class Architecturegeneration:
     tasks_config = "config/tasks.yaml"
 
     csv_source = CSVKnowledgeSource(file_paths=["eraser_icons.csv"])
+    text_source = TextFileKnowledgeSource(file_paths=["eraser_knowledge.md"])
 
     @agent
     def create_pdf_agent(self) -> Agent:
@@ -57,18 +59,19 @@ class Architecturegeneration:
 
     @agent
     def architecture_to_eraser_agent(self) -> Agent:
-        eraser_rag = RagTool(
-            name="EraserDiagramKnowledge",
-            description="Knowledge base about Eraser.io cloud architecture diagram syntax and best practices",
-            knowledge_base_path="knowledge/eraser_docs/",
-            top_k=5,
-        )
+        # eraser_rag = RagTool(
+        #     name="EraserDiagramKnowledge",
+        #     description="Knowledge base about Eraser.io cloud architecture diagram syntax and best practices",
+        #     knowledge_base_path="knowledge/eraser_docs/",
+        #     top_k=5,
+        # )
 
         return Agent(
             config=self.agents_config["architecture_to_eraser_agent"],
             verbose=True,
             allow_delegation=False,
-            tools=[eraser_rag],
+            knowledge_sources=[self.text_source],
+            # tools=[eraser_rag],
         )
 
     # ---------------------------------------------------------------------------
