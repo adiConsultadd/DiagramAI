@@ -8,6 +8,7 @@ from crewai.knowledge.source.csv_knowledge_source import CSVKnowledgeSource
 
 from crewai_tools import RagTool
 
+
 @CrewBase
 class Architecturegeneration:
     agents_config = "config/agents.yaml"
@@ -53,12 +54,24 @@ class Architecturegeneration:
             verbose=True,
             allow_delegation=False,
         )
-    
 
+    @agent
+    def architecture_to_eraser_agent(self) -> Agent:
+        eraser_rag = RagTool(
+            name="EraserDiagramKnowledge",
+            description="Knowledge base about Eraser.io cloud architecture diagram syntax and best practices",
+            knowledge_base_path="knowledge/eraser_docs/",
+            top_k=5,
+        )
 
+        return Agent(
+            config=self.agents_config["architecture_to_eraser_agent"],
+            verbose=True,
+            allow_delegation=False,
+            tools=[eraser_rag],
+        )
 
-
-    #---------------------------------------------------------------------------
+    # ---------------------------------------------------------------------------
     @task
     def create_pdf_extraction_task(self) -> Task:
         return Task(
@@ -76,16 +89,19 @@ class Architecturegeneration:
         return Task(
             config=self.tasks_config["create_section_json_to_steps_task"],
         )
-    
+
     @task
     def rule_validation_task(self) -> Task:
-        return Task(
-            config=self.tasks_config["rule_validation_task"]
-        )
-    
+        return Task(config=self.tasks_config["rule_validation_task"])
 
-    #---------------------------------------------------------------------------
-    
+    @task
+    def json_to_eraser_diagram_task(self) -> Task:
+        return Task(
+            config=self.tasks_config["json_to_eraser_diagram_task"],
+        )
+
+    # ---------------------------------------------------------------------------
+
     @crew
     def crew(self) -> Crew:
         """Creates the Architecturegeneration crew"""

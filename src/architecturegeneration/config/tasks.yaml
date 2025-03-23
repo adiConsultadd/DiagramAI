@@ -40,6 +40,7 @@ create_section_json_to_steps_task:
     Map the relationships between components accurately.
     Define workflow steps based on the implementation process described.
     Set appropriate metadata for the diagram.
+    Make sure to not mix Technologies while creating the json.
 
   expected_output:
     A well-structured JSON object representing the architectural solution.
@@ -58,3 +59,29 @@ rule_validation_task:
     A confirmation message if no violations are found.
   agent: rule_validation_agent
 
+json_to_eraser_diagram_task:
+  description: >
+    Your task is to convert the provided architecture JSON into 
+    valid Eraser.io diagram code that follows Eraser.io's specific syntax.
+
+    The JSON structure represents a cloud architecture with components, connections, and workflow.
+
+    IMPORTANT: 
+    - DO NOT modify or restructure the JSON input
+    - DO NOT output JSON - you must output ONLY valid Eraser.io code
+    - Each component in the JSON must be represented in the diagram
+    - Each connection in the JSON must be represented in the diagram
+    - Use the appropriate Eraser.io shape/icon for each component category
+    - Follow the exact Eraser.io syntax in your knowledge base
+    - Ensure the diagram layout matches the one specified in the JSON
+
+    Before generating code, consult your knowledge base to understand:
+    1. Eraser.io code structure for cloud architecture diagrams
+    2. How to create groups/containers in Eraser.io
+    3. How to properly define connections between components
+    4. How to use the appropriate icons for each component type
+
+  expected_output: >
+    ONLY valid Eraser.io diagram code that can be directly copied into Eraser.io. 
+    Do not include explanations, JSON, or anything other than the Eraser.io diagram code itself.
+  agent: architecture_to_eraser_agent
