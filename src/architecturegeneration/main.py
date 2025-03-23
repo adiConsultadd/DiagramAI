@@ -87,7 +87,7 @@ def run():
         "pdf_url": pdf_url,
         "sections_to_extract": sections_to_extract,
         "jsonOutput": jsonOutput,
-        "json_url": json_url
+        "json_url": json_url,
     }
 
     try:
