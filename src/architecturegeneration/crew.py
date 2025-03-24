@@ -66,12 +66,30 @@ class Architecturegeneration:
         #     top_k=5,
         # )
 
+        rag_tool = RagTool()
+        urls = [
+            "https://docs.eraser.io/docs/diagram-as-code",
+            "https://docs.eraser.io/docs/flow-charts",
+            "https://docs.eraser.io/docs/examples-3",
+            "https://docs.eraser.io/docs/syntax-3",
+            "https://docs.eraser.io/docs/examples-1",
+            "https://docs.eraser.io/docs/syntax-1",
+            "https://docs.eraser.io/docs/examples",
+            "https://docs.eraser.io/docs/syntax",
+            "https://docs.eraser.io/docs/examples-2",
+            "https://docs.eraser.io/docs/syntax-2",
+            "https://docs.eraser.io/docs/styling",
+        ]
+        for url in urls:
+            rag_tool.add(source=url, data_type="web_page")
+
+
         return Agent(
             config=self.agents_config["architecture_to_eraser_agent"],
             verbose=True,
             allow_delegation=False,
             knowledge_sources=[self.text_source],
-            # tools=[eraser_rag],
+            tools=[rag_tool],
         )
 
     # ---------------------------------------------------------------------------
