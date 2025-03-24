@@ -89,7 +89,7 @@ class Architecturegeneration:
             verbose=True,
             allow_delegation=False,
             knowledge_sources=[self.text_source],
-            # tools=[eraser_rag],
+            tools=[rag_tool],
         )
 
     # ---------------------------------------------------------------------------
