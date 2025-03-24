@@ -5,8 +5,12 @@ warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
 
 def run():
-    pdf_url = "case_studies/CaseStudy3.pdf"
+    pdf_url = "case_studies/stage_draft_1_20250318_133052.pdf"
     json_url = "validation.rule.json"
+
+    pdf_text_url = "output/pdf_text.json"
+    extracted_text_url = "output/extacted_text.json"
+    diagram_json_url = "output/diagram.json"
 
     sections_to_extract = (
         "Solution Overview, Solution, Implementation, Solution Implementation"
@@ -88,6 +92,9 @@ def run():
         "sections_to_extract": sections_to_extract,
         "jsonOutput": jsonOutput,
         "json_url": json_url,
+        "pdf_text_url": pdf_text_url,
+        "extracted_text_url" : extracted_text_url,
+        "diagram_json_url" : diagram_json_url,
     }
 
     try:

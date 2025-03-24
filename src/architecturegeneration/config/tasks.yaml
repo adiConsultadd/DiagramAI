@@ -6,11 +6,12 @@ create_pdf_extraction_task:
     The complete text content of the PDF document with preserved structure.
     The output should contain all text from the document, organized in a way that maintains the original document flow and organization.
   agent: create_pdf_agent
+  output_file: output/pdf_text.json
 
 create_section_extraction_task:
   description: >
-    Using the extracted text from the previous task, identify and extract the 
-    following specific sections: {sections_to_extract}.
+    Use the extracted output from the previous task present at {pdf_text_url}.
+    And then identify and extract the following specific sections: {sections_to_extract}.
     For each section:
     1. Identify the section boundaries accurately
     2. Extract the complete content of each section
@@ -26,10 +27,11 @@ create_section_extraction_task:
     }}
     Each section should contain its complete content with proper formatting preserved'''
   agent: create_section_extraction_agent
+  output_file: output/extacted_text.json
 
 create_section_json_to_steps_task:
   description: >
-    Use the extracted output from the previous task to convert the solution description into a structured JSON for diagram generation.
+    Use the extracted output from the previous task present at {extracted_text_url} to convert the solution description into a structured JSON for diagram generation.
     Convert the solution description into a structured JSON for diagram generation.
     The JSON should follow this structure:
     {jsonOutput}
@@ -41,11 +43,11 @@ create_section_json_to_steps_task:
     Define workflow steps based on the implementation process described.
     Set appropriate metadata for the diagram.
     Make sure to not mix Technologies while creating the json.
-
   expected_output:
     A well-structured JSON object representing the architectural solution.
     The JSON should contain all necessary information to generate a diagram that accurately reflects the solution architecture.
   agent: section_json_to_steps_agent
+  output_file: output/diagram.json
 
 rule_validation_task:
   description: >
@@ -61,7 +63,7 @@ rule_validation_task:
 
 json_to_eraser_diagram_task:
   description: >
-    Your task is to convert the provided architecture JSON into 
+    Your task is to convert the provided architecture JSON present at {diagram_json_url} into 
     valid Eraser.io diagram code that follows Eraser.io's specific syntax.
 
     The JSON structure represents a cloud architecture with components, connections, and workflow.
@@ -80,8 +82,8 @@ json_to_eraser_diagram_task:
     2. How to create groups/containers in Eraser.io
     3. How to properly define connections between components
     4. How to use the appropriate icons for each component type
-
   expected_output: >
     ONLY valid Eraser.io diagram code that can be directly copied into Eraser.io. 
     Do not include explanations, JSON, or anything other than the Eraser.io diagram code itself.
   agent: architecture_to_eraser_agent
+  output_file: output/finalEraserCode.md
