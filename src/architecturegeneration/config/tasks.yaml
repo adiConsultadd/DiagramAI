@@ -64,27 +64,55 @@ rule_validation_task:
 
 json_to_eraser_diagram_task:
   description: >
-    Your task is to convert the provided architecture JSON present at {diagram_json_url} into 
-    valid Eraser.io diagram code that follows Eraser.io's specific syntax.
+    Your task is to convert the provided architecture JSON present at {diagram_json_url} into
+    visually optimal Eraser.io diagram code that precisely follows Eraser.io's syntax requirements.
+    CopyThe JSON structure represents a cloud architecture with components, connections, and workflow.
 
-    The JSON structure represents a cloud architecture with components, connections, and workflow.
+    IMPORTANT REQUIREMENTS:
+    - Produce ONLY valid Eraser.io code without any explanations, commentary, or JSON
+    - Preserve the exact component structure, naming, and relationships from the JSON input
+    - Represent EVERY component and EVERY connection specified in the JSON
+    - Organize components using appropriate visual grouping to show logical relationships
+    - Maintain clear visualization of data/process flow directions
+    - Optimize component spacing and positioning for maximum readability
+    - Ensure diagram scales appropriately for both overview and detailed examination
 
-    IMPORTANT: 
-    - DO NOT modify or restructure the JSON input
-    - DO NOT output JSON - you must output ONLY valid Eraser.io code
-    - Each component in the JSON must be represented in the diagram
-    - Each connection in the JSON must be represented in the diagram
-    - Use the appropriate Eraser.io shape/icon for each component category
-    - Follow the exact Eraser.io syntax in your knowledge base
-    - Ensure the diagram layout matches the one specified in the JSON
+    ICON SELECTION REQUIREMENTS:
+    - For each component, select the most appropriate icon from Eraser.io's library based on:
+      1. Exact match for the component type/service (first priority)
+      2. Parent service provider icon if exact match unavailable (second priority)
+      3. Generic category icon that best represents the component's function (third priority)
+      4. If no suitable icon exists, use abstract shapes with clear labels
+    - For AWS services, use AWS-specific icons when available
+    - For Azure services, use Azure-specific icons when available
+    - For GCP services, use GCP-specific icons when available
+    - For database components, use the specific database type icon (MySQL, PostgreSQL, etc.) when available
+    - For generic components like "API" or "Service," use the most semantically appropriate icon
 
-    Before generating code, consult your knowledge base to understand:
-    1. Eraser.io code structure for cloud architecture diagrams
-    2. How to create groups/containers in Eraser.io
-    3. How to properly define connections between components
-    4. How to use the appropriate icons for each component type
+    CONNECTION RENDERING REQUIREMENTS:
+    - Represent directional flow using appropriate arrow styling
+    - Differentiate connection types (data flow, API calls, dependencies) with appropriate line styles
+    - Avoid line crossings whenever possible
+    - Use appropriate line routing (orthogonal, curved) based on diagram complexity
+    - Add connection labels when specified in the JSON
+
+    LAYOUT OPTIMIZATION REQUIREMENTS:
+    - Position components to minimize crossing connections
+    - Group related components visually (using containers when appropriate)
+    - Arrange components to follow logical left-to-right or top-to-bottom process flow
+    - Balance the diagram for visual harmony and equal distribution of elements
+    - Ensure components have sufficient spacing to maintain readability
+
+    VALIDATION STEPS:
+    Before finalizing, verify that your code:
+    1. Represents every component from the JSON
+    2. Includes every connection from the JSON
+    3. Uses valid Eraser.io syntax for all elements
+    4. Maintains proper nesting of components within containers/groups
+    5. Uses appropriate icons for all component types
+    6. Creates a visually balanced and readable diagram
   expected_output: >
-    ONLY valid Eraser.io diagram code that can be directly copied into Eraser.io. 
-    Do not include explanations, JSON, or anything other than the Eraser.io diagram code itself.
+    ONLY valid Eraser.io diagram code that can be directly copied into Eraser.io.
+    No explanations, JSON formatting, or anything other than the pure Eraser.io diagram code itself.
   agent: architecture_to_eraser_agent
   output_file: output/finalEraserCode.md

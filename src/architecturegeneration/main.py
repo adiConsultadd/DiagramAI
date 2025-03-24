@@ -5,7 +5,7 @@ warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
 
 def run():
-    pdf_url = "case_studies/case_study_6.pdf"
+    pdf_url = "case_studies/stage_draft_1_20250318_133052.pdf"
     json_url = "validation.rule.json"
 
     pdf_text_url = "output/pdf_text.json"
