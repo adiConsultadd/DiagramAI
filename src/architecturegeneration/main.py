@@ -5,17 +5,18 @@ warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
 
 def run():
-    pdf_url = "case_studies/stage_draft_1_20250318_133052.pdf"
+    pdf_url = "case_studies/case_study_6.pdf"
     json_url = "validation.rule.json"
 
     pdf_text_url = "output/pdf_text.json"
     extracted_text_url = "output/extacted_text.json"
     diagram_json_url = "output/diagram.json"
 
-    sections_to_extract = (
-        "Solution Overview, Solution, Implementation, Solution Implementation"
-    )
-    sections_to_extract = [section.strip() for section in sections_to_extract]
+    sections_to_extract = "Solution Implementation  overview"
+
+    sections_to_extract_list = []
+    for section in sections_to_extract.split():
+        sections_to_extract_list.append(section.strip())
 
     jsonOutput = {
         "solution": {
@@ -52,49 +53,16 @@ def run():
                 "icon": "appropriate-eraser-icon",
             }
         ],
-        "workflow_steps": [
-            {
-                "step": 1,
-                "title": "Step Title",
-                "description": "Detailed description of the step",
-                "components_involved": ["component-id-1", "component-id-2"],
-                "icon": "appropriate-eraser-icon",
-                "expected_outcome": "Description of the outcome of this step",
-            }
-        ],
-        "metadata": {
-            "diagram_title": "Title for the overall diagram",
-            "diagram_description": "Description for the overall diagram",
-            "layout_suggestion": "horizontal|vertical|nested|network",
-            "color_scheme": "Suggested color scheme",
-            "notes": "Any additional notes for diagram generation",
-        },
-        "external_systems": [
-            {
-                "id": "external-1",
-                "name": "External System Name",
-                "description": "Description of the external system",
-                "icon": "appropriate-eraser-icon",
-                "connections": [
-                    {
-                        "to_component_id": "component-id",
-                        "label": "Description of connection",
-                        "type": "data-flow|integration|api",
-                        "icon": "appropriate-eraser-icon",
-                    }
-                ],
-            }
-        ],
     }
 
     inputs = {
         "pdf_url": pdf_url,
-        "sections_to_extract": sections_to_extract,
+        "sections_to_extract": sections_to_extract_list,
         "jsonOutput": jsonOutput,
         "json_url": json_url,
         "pdf_text_url": pdf_text_url,
-        "extracted_text_url" : extracted_text_url,
-        "diagram_json_url" : diagram_json_url,
+        "extracted_text_url": extracted_text_url,
+        "diagram_json_url": diagram_json_url,
     }
 
     try:

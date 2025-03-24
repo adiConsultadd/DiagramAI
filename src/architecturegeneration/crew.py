@@ -59,12 +59,6 @@ class Architecturegeneration:
 
     @agent
     def architecture_to_eraser_agent(self) -> Agent:
-        # eraser_rag = RagTool(
-        #     name="EraserDiagramKnowledge",
-        #     description="Knowledge base about Eraser.io cloud architecture diagram syntax and best practices",
-        #     knowledge_base_path="knowledge/eraser_docs/",
-        #     top_k=5,
-        # )
 
         rag_tool = RagTool()
         urls = [
@@ -82,7 +76,6 @@ class Architecturegeneration:
         ]
         for url in urls:
             rag_tool.add(source=url, data_type="web_page")
-
 
         return Agent(
             config=self.agents_config["architecture_to_eraser_agent"],

@@ -43,6 +43,7 @@ create_section_json_to_steps_task:
     Define workflow steps based on the implementation process described.
     Set appropriate metadata for the diagram.
     Make sure to not mix Technologies while creating the json.
+    Use Basic Ersaser.io icon if there is no technology defined in a particular step.
   expected_output:
     A well-structured JSON object representing the architectural solution.
     The JSON should contain all necessary information to generate a diagram that accurately reflects the solution architecture.
