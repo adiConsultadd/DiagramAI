@@ -1,26 +1,33 @@
+import pdfplumber
 from crewai.tools import BaseTool
-from langchain_community.document_loaders import PyPDFLoader
 
+class EnhancedPDFExtractorTool(BaseTool):
+    name: str = "Enhanced PDF Extractor Tool"
+    description: str = "Extracts complete and clean text from PDFs including bullet points and special symbols."
 
-class PDFExtractorTool(BaseTool):
-    name: str = "PDF Text Extractor"
-    description: str = "Extracts text from a PDF file at the given path"
-
-    def _run(self, pdf_path: str) -> str:
-        """Extract text from a PDF file."""
+    def _run(self, file_path: str) -> str:
         try:
-            loader = PyPDFLoader(pdf_path)
-            documents = loader.load()
-            text = "\n".join([doc.page_content for doc in documents])
-            return text
+            content = ""
+            with pdfplumber.open(file_path) as pdf:
+                for page in pdf.pages:
+                    text = page.extract_text()
+                    if text:
+                        # Normalize common bullet styles
+                        cleaned_text = (
+                            text.replace("•", "-")
+                                .replace("◦", "-")
+                                .replace("●", "-")
+                                .replace("○", "-")
+                                .replace("▪", "-")
+                        )
+                        content += cleaned_text + "\n\n"
+            return content.strip() if content.strip() else "No text extracted."
         except Exception as e:
-            return f"Error extracting text from PDF: {str(e)}"
-
+            return f"Failed to extract text: {str(e)}"
 
 class SectionExtractorTool(BaseTool):
     name: str = "Section Extractor"
     description: str = "Extracts specific sections from text based on section headings"
-
     def _run(self, text: str, section_names: list) -> dict:
         """Extract specific sections from text."""
         results = {}

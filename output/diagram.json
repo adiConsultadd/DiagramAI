@@ -1,0 +1,160 @@
+{
+  "solution": {
+    "title": "Urban Secure Analytics Case Study",
+    "overview": "This solution for Newport Police Department integrates data from disparate legacy systems into a unified, highly secure analytics platform. It leverages a scalable data integration pipeline, custom Python analytics, ArcGIS geospatial mapping, interactive web‐based dashboards, and secure AWS cloud hosting to deliver real‑time, actionable insights that improve operational decision‑making and efficiency."
+  },
+  "components": [
+    {
+      "id": "component-1",
+      "name": "Data Integration Pipeline",
+      "description": "A scalable pipeline developed to consolidate data from cloud services, databases, and legacy systems using both real‑time ingestion and scheduled batch processing.",
+      "technology": "Custom Integration (Python)",
+      "icon": "server",
+      "category": "integration",
+      "parent_id": "null"
+    },
+    {
+      "id": "component-2",
+      "name": "AWS Cloud Hosting & Compliance",
+      "description": "Leverages AWS infrastructure to provide high scalability and performance, while ensuring CJIS compliance and data encryption standards.",
+      "technology": "AWS",
+      "icon": "aws-management-console",
+      "category": "infrastructure",
+      "parent_id": "null"
+    },
+    {
+      "id": "component-3",
+      "name": "Advanced Analytics & Automation",
+      "description": "Utilizes Python scripting to automate manual data processing, implement machine learning models, and perform statistical analysis for enhanced data reliability.",
+      "technology": "Python",
+      "icon": "server",
+      "category": "application",
+      "parent_id": "null"
+    },
+    {
+      "id": "component-4",
+      "name": "Geospatial Analysis",
+      "description": "Integrates ArcGIS to provide precise geospatial mapping and interactive location-based insights for improved geographic decision-making.",
+      "technology": "ArcGIS",
+      "icon": "globe",
+      "category": "application",
+      "parent_id": "null"
+    },
+    {
+      "id": "component-5",
+      "name": "Interactive Web-Based Dashboards",
+      "description": "Developed with HTML5 and JavaScript frameworks, these dashboards deliver dynamic, real-time insights with interactive drill-down capabilities.",
+      "technology": "HTML5, JavaScript",
+      "icon": "globe",
+      "category": "user",
+      "parent_id": "null"
+    },
+    {
+      "id": "component-6",
+      "name": "Stakeholder Engagement",
+      "description": "Ensures close coordination with Newport Police Department stakeholders for seamless integration of the system into existing operational workflows.",
+      "technology": "N/A",
+      "icon": "box",
+      "category": "user",
+      "parent_id": "null"
+    }
+  ],
+  "groups": [
+    {
+      "id": "group-1",
+      "name": "Data Processing & Analytics",
+      "description": "Components handling data integration and advanced analytics processing.",
+      "icon": "server",
+      "components": [
+        "component-1",
+        "component-3"
+      ]
+    },
+    {
+      "id": "group-2",
+      "name": "User Interface & Engagement",
+      "description": "Components interacting directly with users and facilitating stakeholder engagement.",
+      "icon": "globe",
+      "components": [
+        "component-5",
+        "component-6"
+      ]
+    },
+    {
+      "id": "group-3",
+      "name": "Cloud Infrastructure",
+      "description": "AWS cloud hosting and compliance components that provide the underlying infrastructure.",
+      "icon": "aws-management-console",
+      "components": [
+        "component-2"
+      ]
+    },
+    {
+      "id": "group-4",
+      "name": "Geospatial Analysis",
+      "description": "Component responsible for mapping and location-based insights.",
+      "icon": "globe",
+      "components": [
+        "component-4"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "source_id": "component-1",
+      "target_id": "component-3",
+      "label": "Consolidated data flows into analytics",
+      "type": "data-flow",
+      "direction": "unidirectional",
+      "icon": "server"
+    },
+    {
+      "source_id": "component-2",
+      "target_id": "component-1",
+      "label": "Hosts the integration pipeline",
+      "type": "dependency",
+      "direction": "unidirectional",
+      "icon": "aws-management-console"
+    },
+    {
+      "source_id": "component-2",
+      "target_id": "component-3",
+      "label": "Provides hosting for advanced analytics",
+      "type": "dependency",
+      "direction": "unidirectional",
+      "icon": "aws-management-console"
+    },
+    {
+      "source_id": "component-3",
+      "target_id": "component-5",
+      "label": "Delivers processed analytics data to dashboards",
+      "type": "data-flow",
+      "direction": "unidirectional",
+      "icon": "globe"
+    },
+    {
+      "source_id": "component-3",
+      "target_id": "component-4",
+      "label": "Sends analytical data for geospatial mapping",
+      "type": "integration",
+      "direction": "unidirectional",
+      "icon": "globe"
+    },
+    {
+      "source_id": "component-4",
+      "target_id": "component-5",
+      "label": "Integrates interactive maps into dashboards",
+      "type": "integration",
+      "direction": "unidirectional",
+      "icon": "globe"
+    },
+    {
+      "source_id": "component-5",
+      "target_id": "component-6",
+      "label": "Delivers actionable insights to stakeholders",
+      "type": "data-flow",
+      "direction": "unidirectional",
+      "icon": "globe"
+    }
+  ]
+}

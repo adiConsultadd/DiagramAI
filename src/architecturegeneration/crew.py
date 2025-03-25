@@ -1,7 +1,7 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from architecturegeneration.tools.custom_tool import (
-    PDFExtractorTool,
+    EnhancedPDFExtractorTool,
     SectionExtractorTool,
 )
 from crewai.knowledge.source.csv_knowledge_source import CSVKnowledgeSource
@@ -20,7 +20,7 @@ class Architecturegeneration:
 
     @agent
     def create_pdf_agent(self) -> Agent:
-        pdf_tool = PDFExtractorTool()
+        pdf_tool = EnhancedPDFExtractorTool()
 
         return Agent(
             config=self.agents_config["create_pdf_agent"],

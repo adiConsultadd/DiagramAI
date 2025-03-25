@@ -39,7 +39,7 @@ create_section_json_to_steps_task:
     - Each component should have a unique ID, appropriate categorization (such as frontend, backend, database, external service, queue, workflow, etc.), and an appropriate icon name.  
     - Accurately map relationships between components as described in the solution text.  
     - Define workflow steps based on the described implementation process.  
-    - Set clear and complete metadata for the diagram.  
+    - Set clear and complete metadata for the diagram.
 
     **Icon Assignment Rules:**  
     - If a specific technology is mentioned (such as AWS Lambda, Azure Function, PostgreSQL, Redis, etc.), use the exact technology icon from the known set.  
@@ -48,8 +48,9 @@ create_section_json_to_steps_task:
       - Databases ➡ use `database`  
       - Backend services ➡ use `server`  
       - Frontend and related applications ➡ use `globe`  
+      - salesforce cloud ➡ use `salesforce` 
       - APIs ➡ use `api`  
-      - Any unclassified system ➡ use `box`  
+      - Any unclassified system ➡ use `box` 
     - Do not use placeholder icon names like `"General-eraser.icon"`.  
 
     **Ensure:**  
@@ -88,6 +89,7 @@ json_to_eraser_diagram_task:
     - Maintain clear visualization of data/process flow directions
     - Optimize component spacing and positioning for maximum readability
     - Ensure diagram scales appropriately for both overview and detailed examination
+    - If the description contains any major technology, include that technology in the component name define inside the json. Ignore technologies that are used for frontend development or backend development.
 
     ICON SELECTION REQUIREMENTS:
     - For each component, select the most appropriate icon from Eraser.io's library based on:
