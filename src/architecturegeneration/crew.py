@@ -27,6 +27,7 @@ class Architecturegeneration:
             verbose=True,
             allow_delegation=False,
             tools=[pdf_tool],
+            max_iter=5
         )
 
     @agent
@@ -38,6 +39,7 @@ class Architecturegeneration:
             verbose=True,
             allow_delegation=False,
             tools=[section_tool],
+            max_iter=5
         )
 
     @agent
@@ -47,6 +49,7 @@ class Architecturegeneration:
             verbose=True,
             allow_delegation=False,
             knowledge_sources=[self.csv_source],
+            max_iter=5
         )
 
     @agent
@@ -55,6 +58,7 @@ class Architecturegeneration:
             config=self.agents_config["rule_validation_agent"],
             verbose=True,
             allow_delegation=False,
+            max_iter=5
         )
 
     @agent
