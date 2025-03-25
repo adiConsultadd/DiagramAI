@@ -12,11 +12,13 @@ def run():
     extracted_text_url = "output/extacted_text.json"
     diagram_json_url = "output/diagram.json"
 
-    sections_to_extract = "Solution Implementation  overview"
+    # sections_to_extract = "Solution Implementation  overview"
 
-    sections_to_extract_list = []
-    for section in sections_to_extract.split():
-        sections_to_extract_list.append(section.strip())
+    sections_to_extract_list = [
+        "Problem",
+        "Solution Implementation",
+        "Solution Overview",
+    ]
 
     jsonOutput = {
         "solution": {
