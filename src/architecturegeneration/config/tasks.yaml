@@ -47,7 +47,7 @@ create_section_json_to_steps_task:
     - Instead, intelligently assign the most appropriate general Eraser.io icon (refer to eraser_icons.csv) based on the functional type of the component. For example:  
       - Databases ➡ use `database`  
       - Backend services ➡ use `server`  
-      - Frontend applications ➡ use `html5`  
+      - Frontend and related applications ➡ use `globe`  
       - APIs ➡ use `api`  
       - Any unclassified system ➡ use `box`  
     - Do not use placeholder icon names like `"General-eraser.icon"`.  
